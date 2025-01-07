@@ -2,7 +2,7 @@
 
 Flutter weather app utilizing OpenWeather API to display current weather.
 
-![simulator_screenshot_FD586245-4CC9-42C8-85B4-729CFAE7E97F](https://github.com/user-attachments/assets/c1ff0e0b-fc1a-4c79-b777-ff3679b38a1c)
+<img src="https://github.com/user-attachments/assets/c1ff0e0b-fc1a-4c79-b777-ff3679b38a1c" height="800" alt="screenshot">
 
 ## Getting Started
 
