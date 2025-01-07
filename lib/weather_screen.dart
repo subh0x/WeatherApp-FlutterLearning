@@ -1,7 +1,43 @@
 import 'package:flutter/material.dart';
 
+import 'widgets/additional_info_item.dart';
+import 'widgets/hourly_forecast_item.dart';
+
 class WeatherScreen extends StatelessWidget {
-  const WeatherScreen({super.key});
+  final dynamic hourlyForecasts = [
+    {
+      "timeOfHour": "11:00",
+      "forecastedCondition": "Cloudy",
+      "forecastedTemp": 30
+    },
+    {
+      "timeOfHour": "12:00",
+      "forecastedCondition": "Sunny",
+      "forecastedTemp": 30
+    },
+    {
+      "timeOfHour": "13:00",
+      "forecastedCondition": "Sunny",
+      "forecastedTemp": 30.5
+    },
+    {
+      "timeOfHour": "14:00",
+      "forecastedCondition": "Sunny",
+      "forecastedTemp": 31
+    },
+    {
+      "timeOfHour": "15:00",
+      "forecastedCondition": "Cloudy",
+      "forecastedTemp": 28
+    },
+    {
+      "timeOfHour": "16:00",
+      "forecastedCondition": "Cloudy",
+      "forecastedTemp": 27
+    }
+  ];
+
+  WeatherScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -78,33 +114,15 @@ class WeatherScreen extends StatelessWidget {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: [
-                  HourlyForecastItem(
-                    hour: "11:00",
-                    hourWeatherIcon: Icons.cloud,
-                    hourTemp: "30°C",
-                  ),
-                  HourlyForecastItem(
-                    hour: "11:00",
-                    hourWeatherIcon: Icons.cloud,
-                    hourTemp: "30°C",
-                  ),
-                  HourlyForecastItem(
-                    hour: "11:00",
-                    hourWeatherIcon: Icons.cloud,
-                    hourTemp: "30°C",
-                  ),
-                  HourlyForecastItem(
-                    hour: "11:00",
-                    hourWeatherIcon: Icons.cloud,
-                    hourTemp: "30°C",
-                  ),
-                  HourlyForecastItem(
-                    hour: "11:00",
-                    hourWeatherIcon: Icons.cloud,
-                    hourTemp: "30°C",
-                  ),
-                ],
+                children: hourlyForecasts
+                    .map<Widget>((element) => HourlyForecastItem(
+                        hour: element['timeOfHour'],
+                        hourWeatherIcon:
+                            ((element['forecastedCondition']) == "Sunny")
+                                ? Icons.sunny
+                                : Icons.cloud,
+                        hourTemp: "${element['forecastedTemp']}°C"))
+                    .toList(),
               ),
             ),
             Container(
@@ -137,91 +155,6 @@ class WeatherScreen extends StatelessWidget {
                   infoDataValue: "1006 Pa",
                 ),
               ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class AddtionalInfoItem extends StatelessWidget {
-  final IconData infoCardIcon;
-  final String infoText;
-  final String infoDataValue;
-
-  const AddtionalInfoItem(
-      {required this.infoCardIcon,
-      required this.infoText,
-      this.infoDataValue = "0",
-      super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      child: Column(
-        children: [
-          Icon(
-            infoCardIcon,
-            size: 40,
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Text(
-            infoText,
-            style: TextStyle(
-                fontSize: 16, fontWeight: FontWeight.w400, color: Colors.white),
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Text(
-            infoDataValue,
-            style: TextStyle(
-                fontSize: 16, fontWeight: FontWeight.w800, color: Colors.white),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class HourlyForecastItem extends StatelessWidget {
-  final String hour;
-  final IconData hourWeatherIcon;
-  final String hourTemp;
-
-  const HourlyForecastItem(
-      {required this.hour,
-      required this.hourWeatherIcon,
-      required this.hourTemp,
-      super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: SizedBox(
-        height: 125,
-        width: 110,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          spacing: 10,
-          children: [
-            Text(
-              hour,
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w800,
-                  color: Colors.white),
-            ),
-            Icon(hourWeatherIcon),
-            Text(
-              hourTemp,
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.white),
             ),
           ],
         ),
